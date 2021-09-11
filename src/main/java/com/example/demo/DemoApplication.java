@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={
+		"com.example.demo", "com.hospital.details"})
 public class DemoApplication {
 
 	public static void main(String[] args) {
@@ -14,8 +15,11 @@ public class DemoApplication {
 		for(String beans : applicationcontext.getBeanDefinitionNames()){
 			System.out.println("beans-->"+beans);
 		}
-		/*MainClass mc = applicationcontext.getBean(MainClass.class);
-		mc.toBeImplementedMethod();*/
+		System.out.println("bean definition -->"+applicationcontext.containsBeanDefinition("implementInOneWay"));
+		MainClass mc = applicationcontext.getBean(MainClass.class);
+		mc.toBeImplementedMethod();
+
+
 	}
 
 }
