@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication(scanBasePackages={
-		"com.example.demo", "com.hospital.details"})
+		"com.example.demo", "com.hospital.details","com.example.ExceptionHandling"})
 public class DemoApplication {
 
 	public static void main(String[] args) {
