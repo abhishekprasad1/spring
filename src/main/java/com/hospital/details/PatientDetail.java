@@ -2,14 +2,26 @@ package com.hospital.details;
 
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 @Component
 public class PatientDetail {
+    @Positive(message = "The Id should be positive")
     private int id;
+    @Size(min = 2,max = 50,message = "First Name should be between 2-50 Characters")
+    @Pattern(regexp = "^[A-Za-z]*$",message = "First Name should only contain alphabets.")
     private String FirstName;
+    @Size(max=50,message = "Middle Name should not be more than 50 Characters")
+    @Pattern(regexp = "^[A-Za-z]*$",message = "MiddleName Name should only contain alphabets.")
     private String MiddleName;
+    @Size(max = 50,message = "LastName should not be more than 50 Characters")
+    @Pattern(regexp = "^[A-Za-z]*$",message = "LastName Name should only contain alphabets.")
     private String LastName;
+    @Pattern(regexp = "^[0-9]*$",message = "Mobile Number should only be Digits.")
     private String MobileNumber;
+    @Size(min = 10,max = 300,message = "Address should be between 10-300 Characters.")
     private String Address;
 
     public PatientDetail() {

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
@@ -41,11 +42,18 @@ public class DemoController {
     }
 
     @PostMapping("/savepatient")
-    public ResponseEntity addData(@RequestBody PatientDetail patientDetail){
+    public ResponseEntity addData(@Valid @RequestBody PatientDetail patientDetail){
         service.savePatientDetail(patientDetail);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(patientDetail.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
 
+    
 
+    @DeleteMapping("/deletepatient/{id}")
+    public void deleteData(@PathVariable int id){
+        if(!service.deletePatientDetail(id)){
+            throw new PatientNotFoundException("User with Id "+id+" does not exist");
+        }
     }
 }

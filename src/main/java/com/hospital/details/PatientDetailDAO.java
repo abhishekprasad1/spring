@@ -5,19 +5,21 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 @Component
 @Service
 public class PatientDetailDAO {
-    public static ArrayList<PatientDetail> PatientDetails = new ArrayList<>();
-    static int PatientCount = 0;
+    public static List<PatientDetail> PatientDetails = new ArrayList<>();
+
 
     static {
         PatientDetails.add(new PatientDetail(1, "abhishek", "shekhar", "prasad", "9892952261", "302 Kanchan ganga"));
     }
 
 
-    public static ArrayList<PatientDetail> getAllPatientDetails() {
+    public static List<PatientDetail> getAllPatientDetails() {
         return PatientDetails;
     }
 
@@ -35,5 +37,17 @@ public class PatientDetailDAO {
         patientDetail.setId(++count);
         PatientDetails.add(patientDetail);
     }
+
+    public static boolean deletePatientDetail(int id) {
+        boolean deleteStatus=false;
+        for (PatientDetail patient : PatientDetails) {
+            if (patient.getId() == id) {
+                deleteStatus = PatientDetails.remove(patient);
+                break;
+            }
+        }
+        return deleteStatus;
+    }
+
 
 }
